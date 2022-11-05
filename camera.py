@@ -28,10 +28,12 @@ class Camera:
         
         self.proj_loc = glGetUniformLocation(self.shaderId, "m_proj")
         self.view_loc = glGetUniformLocation(self.shaderId, "m_view")
+        self.cam_pos_loc = glGetUniformLocation(self.shaderId, "u_cam_pos")
         
     def set_camera(self):
         glUniformMatrix4fv(self.view_loc, 1, True, np.array(self.m_view))
         glUniformMatrix4fv(self.proj_loc, 1, True,  np.array(self.m_proj))
+        glUniform3fv(self.cam_pos_loc,1,np.array(self.position))
         
     def rotate(self):
         rel_x, rel_y = pg.mouse.get_rel()

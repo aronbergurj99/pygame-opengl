@@ -9,6 +9,7 @@ from shader_programs import ShaderPrograms
 from game_objects import *
 from camera import Camera
 from mesh import Mesh
+from lights import Light
 
 class GraphicsProgram:
     def __init__(self, window=(1200,900)):
@@ -23,7 +24,7 @@ class GraphicsProgram:
         self.mesh = Mesh(self)
         self.scene = CatObject(self, pos=(0, 0, -2), scale=(0.1,0.1,0.1))
         self.skybox = SkyboxObject(self)
-        
+        self.light = Light(self)
         self.init_game()
     
     def init_game(self):
@@ -44,11 +45,12 @@ class GraphicsProgram:
         self.init_frame()
         self.shaders.get("default").use()
         self.camera.update()
+        self.light.update()
         
         self.scene.draw()
         
-        self.shaders.get("skybox").use()
-        self.skybox.draw()
+        # self.shaders.get("skybox").use()
+        # self.skybox.draw()
         
         pg.display.flip()
     

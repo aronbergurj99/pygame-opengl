@@ -32,10 +32,13 @@ class BaseModel:
         glVertexAttribPointer(
             position_loc,
             3, GL_FLOAT, False, 8 * sizeof(GLfloat), ctypes.c_void_p(5 * sizeof(GLfloat)))
-        
-        # glVertexAttribPointer(
-        #     glGetAttribLocation(self.shaderId, "a_normal"),
-        #     3, GL_FLOAT, False, 8 * sizeof(GLfloat), ctypes.c_void_p(3 * sizeof(GLfloat)))
+            
+        noraml_loc = glGetAttribLocation(self.shaderId, "a_normal")
+        glEnableVertexAttribArray(noraml_loc)
+        glVertexAttribPointer(
+            noraml_loc,
+            3, GL_FLOAT, False, 8 * sizeof(GLfloat), ctypes.c_void_p(3 * sizeof(GLfloat)))
+            
         texture_cord_loc = glGetAttribLocation(self.shaderId, "a_texcord0")
         glEnableVertexAttribArray(texture_cord_loc)
         glVertexAttribPointer(
